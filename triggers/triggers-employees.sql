@@ -65,8 +65,12 @@ CREATE TRIGGER employee_insert_trigger
 /* Insert values into 'Employees' */
 INSERT INTO "Employees" VALUES(10,' Expósito','Izquierdo','Manager',1,'1962-02-18 00:00:00','2010-08-14 00:00:00','11120 Jasper Ave NW','Edmonton','AB','Spain','T5K 2N1','+1 780 428-9482','+1 780 428-3457','cexposit@ull.edu.es');
 
-/* Show all the employees */
+/* Show all the elements of 'Employees' */
 SELECT * FROM "Employees" WHERE "EmployeeId" = 10;
 
 /* Show all the elements of 'Employee_Audit' */
 SELECT * FROM "Employee_Audit";
+
+/* Show all the triggers */
+SELECT * FROM pg_trigger;
+

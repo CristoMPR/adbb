@@ -49,3 +49,6 @@ SELECT * FROM COMPANY;
 
 /* Show all the elements of 'AUDIT' */
 SELECT * FROM AUDIT;
+
+/* Show all the triggers */
+SELECT * FROM pg_trigger;
