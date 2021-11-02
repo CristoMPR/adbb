@@ -3,7 +3,7 @@
  * Usage: 
  *   sudo su postgres
  *   psql
- *   \i example-triggers.sql
+ *   \i triggers-employees.sql
  */
 
 /* Remove all the tables in 'public'  schema */

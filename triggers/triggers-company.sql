@@ -3,7 +3,7 @@
  * Usage: 
  *   sudo su postgres
  *   psql
- *   \i example-triggers.sql
+ *   \i triggers-company.sql
  */
 
 /* Remove all the tables in 'public'  schema */
@@ -29,6 +29,7 @@ CREATE TABLE AUDIT (
    ENTRY_DATE TEXT NOT NULL
 );
 
+/* Create function 'auditlogfunc' */
 CREATE OR REPLACE FUNCTION auditlogfunc() RETURNS TRIGGER AS $example_table$
    BEGIN
       INSERT INTO AUDIT(EMP_ID, ENTRY_DATE) VALUES (new.ID, current_timestamp);
@@ -36,16 +37,15 @@ CREATE OR REPLACE FUNCTION auditlogfunc() RETURNS TRIGGER AS $example_table$
    END;
 $example_table$ LANGUAGE plpgsql;
 
-
-
 /* Create trigger 'employee_insert_trigger' */
 CREATE TRIGGER example_trigger AFTER INSERT ON COMPANY
 FOR EACH ROW EXECUTE PROCEDURE auditlogfunc();
 
+/* Insert values into 'Employees' */
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (1, 'Christopher', 32, 'Tenerife', 20000.00 );
 
-
-INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (1, 'Paul', 32, 'California', 20000.00 );
-
+/* Show all the elements of 'COMPANY' */
 SELECT * FROM COMPANY;
 
+/* Show all the elements of 'AUDIT' */
 SELECT * FROM AUDIT;
