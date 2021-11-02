@@ -6,12 +6,15 @@
  *   \i example-triggers.sql
  */
 
+/* Remove all the tables in 'public'  schema */
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
 /* Remove all existing tables */
 DROP TABLE IF EXISTS Employees;
 DROP TABLE IF EXISTS Employee_Audit;
 
-
-
+/* Create table 'Employees' */
 CREATE TABLE "Employees" (
   "EmployeeId" INT NOT NULL,
   "LastName" VARCHAR(20) NOT NULL,
@@ -31,8 +34,7 @@ CREATE TABLE "Employees" (
   CONSTRAINT "PK_Employees" PRIMARY KEY  ("EmployeeId")
 );
 
-
-
+/* Create table 'Employee_Audit' */
 CREATE TABLE "Employee_Audit" (
   "EmployeeId" INT NOT NULL,
   "LastName" VARCHAR(20) NOT NULL,
@@ -41,8 +43,7 @@ CREATE TABLE "Employee_Audit" (
   "EmpAdditionTime" VARCHAR(20) NOT NULL
 );
 
-
-
+/* Create function 'employee_insert_trigger_fnc' */
 CREATE OR REPLACE FUNCTION employee_insert_trigger_fnc()
   RETURNS trigger AS
 $$
@@ -54,23 +55,18 @@ END;
 $$
 LANGUAGE 'plpgsql';
 
-
-
+/* Create trigger 'employee_insert_trigger' */
 CREATE TRIGGER employee_insert_trigger
   AFTER INSERT
   ON "Employees"
   FOR EACH ROW
   EXECUTE PROCEDURE employee_insert_trigger_fnc();
 
-
-
+/* Insert values into 'Employees' */
 INSERT INTO "Employees" VALUES(10,' Expósito','Izquierdo','Manager',1,'1962-02-18 00:00:00','2010-08-14 00:00:00','11120 Jasper Ave NW','Edmonton','AB','Spain','T5K 2N1','+1 780 428-9482','+1 780 428-3457','cexposit@ull.edu.es');
 
-
-
+/* Show all the employees */
 SELECT * FROM "Employees" WHERE "EmployeeId" = 10;
 
-
-
+/* Show all the elements of 'Employee_Audit' */
 SELECT * FROM "Employee_Audit";
-
