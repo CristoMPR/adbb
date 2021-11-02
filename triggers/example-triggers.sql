@@ -1,4 +1,11 @@
+/* 
+ * Commands used to create a simple trigger between 2 tables: Employees and Employee_Audit
+ * Usage: \i example-triggers.sql
+ */
+
+/* Remove all existing tables */
 DROP TABLE IF EXISTS Employees;
+DROP TABLE IF EXISTS Employee_Audit;
 
 
 
