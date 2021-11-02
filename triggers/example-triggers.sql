@@ -1,6 +1,9 @@
 /* 
  * Commands used to create a simple trigger between 2 tables: Employees and Employee_Audit
- * Usage: \i example-triggers.sql
+ * Usage: 
+ *   sudo su postgres
+ *   psql
+ *   \i example-triggers.sql
  */
 
 /* Remove all existing tables */
